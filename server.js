@@ -122,7 +122,8 @@ let subscribeToPlatformEvents = () => {
             .of('/')
             .emit('mix_submitted', {
                 mixId: message.payload.Bundle_Id__c,
-                mixName: message.payload.Bundle_Name__c
+                mixName: message.payload.Bundle_Name__c,
+                account: message.payload.Account__c
             });
     });
     client.subscribe('/event/Bundle_Unsubmitted__e', function(message) {
