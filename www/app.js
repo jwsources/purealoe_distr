@@ -18,7 +18,7 @@ function renderMix(mix, isAnimated) {
                     <div class="col-md-12 col-lg-7">
                         <table>
                             <tr>
-                                <td class="panel-table-label">Customer:</td><td>${mix.descr}</td>
+                                <td class="panel-table-label">Description:</td><td>${mix.descr}</td>
                             </tr>
                             <tr>
                                 <td class="panel-table-label">Customer:</td><td>${mix.account}</td>
