@@ -116,20 +116,20 @@ org.authenticate({ username: SF_USER_NAME, password: SF_USER_PASSWORD }, err => 
 let subscribeToPlatformEvents = () => {
     var client = new faye.Client(org.oauth.instance_url + '/cometd/41.0/');
     client.setHeader('Authorization', 'OAuth ' + org.oauth.access_token);
-    client.subscribe("/event/Bundle_Submitted__e", function(message) {
+    client.subscribe('/event/Bundle_Submitted__e', function(message) {
         // Send message to all connected Socket.io clients
         io
-            .of("/")
-            .emit("mix_submitted", {
+            .of('/')
+            .emit('mix_submitted', {
                 mixId: message.payload.Bundle_Id__c,
                 mixName: message.payload.Bundle_Name__c
             });
     });
-    client.subscribe("/event/Bundle_Unsubmitted__e", function(message) {
+    client.subscribe('/event/Bundle_Unsubmitted__e', function(message) {
         // Send message to all connected Socket.io clients
         io
-            .of("/")
-            .emit("mix_unsubmitted", {
+            .of('/')
+            .emit('mix_unsubmitted', {
                 mixId: message.payload.Bundle_Id__c
             });
     });
