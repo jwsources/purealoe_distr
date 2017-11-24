@@ -1,5 +1,5 @@
 {
-    "name": "Pure Aloe",
+    "name": "pure",
     "description": "Sample application",
     "env": {
         "SF_CLIENT_ID": {
