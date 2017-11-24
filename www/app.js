@@ -13,7 +13,7 @@ function renderMix(mix, isAnimated) {
     return `
         <div class="col-sm-12">
             <div class="panel panel-primary ${isAnimated?"animateIn":""}">
-                <div class="panel-heading">Mix ID: ${mix.mixId}</div>
+                <div class="panel-heading">Bundle ID: ${mix.mixName}</div>
                 <div class="panel-body">
                     <div class="col-md-12 col-lg-7">
                         <table>
@@ -32,7 +32,7 @@ function renderMix(mix, isAnimated) {
                         </button>
                         <button class="btn btn-info" onclick="approveMix('${mix.mixId}')">
                             <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
-                            Approve
+                            Order Bundle
                         </button>
                     </div>
                     <div id="details-${mix.mixId}" class="col-md-12"></div>
