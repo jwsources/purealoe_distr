@@ -18,8 +18,8 @@ let getMixes = (req, res) => {
             mixes.forEach(mix => {
                 prettyMixes.push({
                     mixId: mix.get("Id"),
-                    mixName: mix.get("Name"),
-                    account: mix.get("Account__r").Name
+                    mixName: mix.get("Name")//,
+ //           account: mix.get("Account__r").Name
                 });
             });
             res.json(prettyMixes);
