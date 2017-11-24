@@ -7,7 +7,7 @@ let server = require('http').Server(app);
 let io = require('socket.io')(server);
 
 let getMixes = (req, res) => {
-    let q = "SELECT Id, Name, Account__r.Name FROM Bundle__c WHERE Status__c='Submitted to Distributors'";
+    let q = "SELECT Id, Name, Account__r.Name, Qty__c FROM Bundle__c WHERE Status__c='Submitted to Distributors'";
     org.query({ query: q }, (err, resp) => {
         if (err) {
             console.log(err);
@@ -19,7 +19,8 @@ let getMixes = (req, res) => {
                 prettyMixes.push({
                     mixId: mix.get("Id"),
                     mixName: mix.get("Name"),
-                    account: mix.get("Account__r").Name
+                    account: mix.get("Account__r").Name,
+                    quantity: mix.get("Qty__c")
                 });
             });
             res.json(prettyMixes);

@@ -21,7 +21,7 @@ function renderMix(mix, isAnimated) {
                                 <td class="panel-table-label">Customer:</td><td>${mix.account}</td>
                             </tr>
                             <tr>
-                                <td class="panel-table-label">Mix Name:</td><td>${mix.mixName}</td>
+                                <td class="panel-table-label">Bundle Name:</td><td>${mix.mixName}</td>
                             </tr>
                         </table>
                     </div>   
