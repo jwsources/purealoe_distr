@@ -19,7 +19,7 @@ let getMixes = (req, res) => {
                 prettyMixes.push({
                     mixId: mix.get("Id"),
                     mixName: mix.get("Name"),
-                    account: "General Utilities" //mix.get("Account__r").Name
+                    account: mix.get("Account__r").Name
                 });
             });
             res.json(prettyMixes);
