@@ -18,8 +18,8 @@ let getMixes = (req, res) => {
             mixes.forEach(mix => {
                 prettyMixes.push({
                     mixId: mix.get("Id"),
-                    mixName: mix.get("Name")//,
- //           account: mix.get("Account__r").Name
+                    mixName: mix.get("Name"),
+                    account: "General Utilities" //mix.get("Account__r").Name
                 });
             });
             res.json(prettyMixes);
@@ -58,7 +58,7 @@ let approveMix = (req, res) => {
     let mixId = req.params.mixId;
     let event = nforce.createSObject("Bundle_Ordered__e");
     event.set('Bundle_Id__c', mixId);
-    event.set("Account_Id__c", "Test");
+    event.set("Account_Id__c", account);
     org.insert({ sobject: event }, err => {
         if (err) {
             console.error(err);
