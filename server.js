@@ -58,7 +58,7 @@ let approveMix = (req, res) => {
     let mixId = req.params.mixId;
     let event = nforce.createSObject("Bundle_Ordered__e");
     event.set('Bundle_Id__c', mixId);
-    event.set("Account_Id__c", account);
+    event.set("Account_Id__c", "General Utilities");
     org.insert({ sobject: event }, err => {
         if (err) {
             console.error(err);
