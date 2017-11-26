@@ -7,7 +7,7 @@ let server = require('http').Server(app);
 let io = require('socket.io')(server);
 
 let getMixes = (req, res) => {
-    let q = "SELECT Id, Name, Account__r.Name, Description__c, Qty__c FROM Bundle__c WHERE Status__c='Submitted to Distributors'";
+    let q = "SELECT Id, Name, Account__r.Name, Account__r.Id, Description__c, Qty__c FROM Bundle__c WHERE Status__c='Submitted to Distributors'";
     org.query({ query: q }, (err, resp) => {
         if (err) {
             console.log(err);
@@ -20,6 +20,7 @@ let getMixes = (req, res) => {
                     mixId: mix.get("Id"),
                     mixName: mix.get("Name"),
                     account: mix.get("Account__r").Name,
+                    accountId: mix.get("Account__r").Id,
                     qty: mix.get("Qty__c"),
                     descr: mix.get("Description__c")
                 });
@@ -61,7 +62,7 @@ let approveMix = (req, res) => {
 //    let account = req.params.account;
     let event = nforce.createSObject("Bundle_Ordered__e");
     event.set('Bundle_Id__c', mixId);
-    event.set("Account_Id__c", "0010O00001rMbCDQA0"); //account);
+    event.set("Account_Id__c", accountId); //"0010O00001rMbCDQA0");
     org.insert({ sobject: event }, err => {
         if (err) {
             console.error(err);

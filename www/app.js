@@ -80,7 +80,7 @@ function deleteMix(mixId) {
 var socket = io.connect();
 
 socket.on('mix_submitted', function (newMix) {
-    // if the mix is alresdy in the list: do nothing
+    // if the mix is already in the list: do nothing
     var exists = false;
     mixes.forEach((mix) => {
         if (mix.mixId == newMix.mixId) {
