@@ -62,7 +62,7 @@ let approveMix = (req, res) => {
 //    let account = req.params.account;
     let event = nforce.createSObject("Bundle_Ordered__e");
     event.set('Bundle_Id__c', mixId);
-    event.set("Account_Id__c", accountId); //"0010O00001rMbCDQA0");
+    event.set("Account_Id__c", "0010O00001rMbCDQA0");
     org.insert({ sobject: event }, err => {
         if (err) {
             console.error(err);
