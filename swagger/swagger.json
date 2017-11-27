@@ -1,0 +1,97 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "PureAloe API",
+        "description": "Salesforce Demo",
+        "version": "1.0.0"
+    },
+    "host": "purealoe.herokuapp.com",
+    "schemes": [
+        "https"
+    ],
+    "basePath": "/",
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/inventory/{productId}": {
+            "get": {
+                "summary": "Pure Aloe inventory",
+                "description": "The inventory endpoint returns information the current stock.\n",
+                "parameters": [
+                    {
+                        "name": "productId",
+                        "in": "path",
+                        "description": "The product to request stock update from.",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "tags": [
+                    "Inventory"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/ProductId"
+                            }
+                        }
+                    },
+                    "405": {
+                        "description": "Invalid input"
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "ProductId": {
+            "type": "object",
+            "properties": {
+                "product_id": {
+                    "type": "string",
+                    "description": "Unique identifier representing a specific product for a given latitude & longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles."
+                },
+                "description": {
+                    "type": "string",
+                    "description": "Description of product."
+                },
+                "display_name": {
+                    "type": "string",
+                    "description": "Display name of product."
+                },
+                "capacity": {
+                    "type": "string",
+                    "description": "Capacity of product. For example, 4 people."
+                },
+                "image": {
+                    "type": "string",
+                    "description": "Image URL representing the product."
+                }
+            }
+        },
+        "Error": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "message": {
+                    "type": "string"
+                },
+                "fields": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}
