@@ -128,7 +128,9 @@ let subscribeToPlatformEvents = () => {
             .emit('mix_submitted', {
                 mixId: message.payload.Bundle_Id__c,
                 mixName: message.payload.Bundle_Name__c,
-                account: message.payload.Account__c
+                account: message.payload.Account__c,
+                qty: message.payload.Qty__c,
+                descr: messagge.payload.Description__c
             });
     });
     client.subscribe('/event/Bundle_Unsubmitted__e', function(message) {
