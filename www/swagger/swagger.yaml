@@ -1,0 +1,68 @@
+# this is an example for a Salesforce Demo in YAML
+swagger: '2.0'
+info:
+  title: PureAloe API
+  description: Salesforce Demo
+  version: "1.0.0"
+# the domain of the service
+host: purealoe.herokuapp.com
+# array of all schemes that your API supports
+schemes:
+  - https
+# will be prefixed to all paths
+basePath: /
+produces:
+  - application/json
+paths:
+  /inventory/{productId}:
+    get:
+      summary: Pure Aloe inventory
+      description: |
+        The inventory endpoint returns information the current stock.
+      parameters:
+        - name: productId
+          in: path
+          description: The product to request stock update from.
+          required: true
+          type: string
+      tags:
+        - Inventory
+      responses:
+        200:
+          description: Success
+          schema:
+            items:
+              $ref: '#/definitions/StockList'
+        405:
+          description: Invalid input
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+definitions:
+  StockList:
+    type: object
+    properties:
+      productName:
+        type: string
+        description: Unique identifier.
+      warehouse:
+        type: string
+        description: Warehouse name.
+      location:
+        type: string
+        description: Warehouse location.
+      qty:
+        type: integer
+        format: int32
+        description: Items in stock.
+  Error:
+    type: object
+    properties:
+      code:
+        type: integer
+        format: int32
+      message:
+        type: string
+      fields:
+        type: string
