@@ -76,7 +76,7 @@ let getInventory = (req, res) => {
                     qty: product.get("Qty__c")
                 });
             });
-            res.json(prettyMixItems);
+            res.json(prettyProducts);
         }
     });
 
