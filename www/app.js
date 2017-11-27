@@ -21,9 +21,6 @@ function renderMix(mix, isAnimated) {
                                 <td class="panel-table-label">Description:</td><td>${mix.descr}</td>
                             </tr>
                             <tr>
-                                <td class="panel-table-label">Customer:</td><td>${mix.account}</td>
-                            </tr>
-                            <tr>
                                 <td class="panel-table-label">Items:</td><td>${mix.qty}</td>
                             </tr>
                         </table>
