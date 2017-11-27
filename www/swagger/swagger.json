@@ -68,7 +68,6 @@
                 },
                 "qty": {
                     "type": "integer",
-                    "format": "int32",
                     "description": "Items in stock."
                 }
             }
