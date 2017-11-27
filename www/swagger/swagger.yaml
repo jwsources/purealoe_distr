@@ -31,8 +31,7 @@ paths:
         200:
           description: Success
           schema:
-            items:
-              $ref: '#/definitions/StockList'
+            $ref: '#/definitions/StockList'
         405:
           description: Invalid input
         default:
