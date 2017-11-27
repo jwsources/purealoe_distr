@@ -73,7 +73,7 @@ let getInventory = (req, res) => {
                     productName: product.get("Product__r").Name,
                     warehouse: product.get("Warehouse__r").Name,
                     location: product.get("Warehouse__r").Location__c,
-                    qty: product.get("Qty__c")
+                    qty: product.get("Quantity__c")
                 });
             });
             res.json(prettyProducts);
