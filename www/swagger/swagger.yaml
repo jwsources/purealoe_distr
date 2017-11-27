@@ -9,8 +9,6 @@ host: purealoe.herokuapp.com
 # array of all schemes that your API supports
 schemes:
   - https
-# will be prefixed to all paths
-basePath: /
 produces:
   - application/json
 paths:
