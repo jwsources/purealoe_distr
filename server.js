@@ -58,6 +58,30 @@ let getMixDetails = (req, res) => {
 
 };
 
+let getInventory = (req, res) => {
+    let productName = req.params.product;
+    let q = "SELECT Id, Product__r.Name, Warehouse__r.Name, Warehouse__r.Location__c, Quantity__c " + "FROM StockItem__c " + "WHERE Product__r.Name = '" + productName + "'";
+    org.query({ query: q }, (err, resp) => {
+        if (err) {
+            console.log(err);
+            res.sendStatus(500);
+        } else {
+            let products = resp.records;
+            let prettyProducts = [];
+            products.forEach(product => {
+                prettyProducts.push({
+                    productName: product.get("Product__r").Name,
+                    warehouse: product.get("Warehouse__r").Name,
+                    location: product.get("Warehouse__r").Location__c,
+                    qty: product.get("Qty__c")
+                });
+            });
+            res.json(prettyMixItems);
+        }
+    });
+
+};
+
 let approveMix = (req, res) => {
     let mixId = req.params.mixId;
 //    let account = req.params.account;
@@ -80,6 +104,7 @@ app.use(cors());
 app.use('/', express.static(__dirname + '/www'));
 app.get('/mixes', getMixes);
 app.get('/mixes/:mixId', getMixDetails);
+app.get('/inventory/:product', getInventory);
 app.post('/approvals/:mixId', approveMix);
 
 
