@@ -4,6 +4,12 @@ info:
   title: PureAloe API
   description: Salesforce Demo
   version: "1.0.0"
+  termsOfService: 'http://swagger.io/terms/'
+  contact:
+    email: jweijters@salesforce.com
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
 # the domain of the service
 host: purealoe.herokuapp.com
 # array of all schemes that your API supports
@@ -12,6 +18,23 @@ schemes:
 produces:
   - application/json
 paths:
+  /inventory/all:
+    get:
+      summary: Returns a list of all available Pure Aloe inventory items
+      description: The inventory endpoint returns information the current stock.
+      operationId: getAllInventory
+      responses:
+        '200':
+          description: success
+          schema:
+            $ref: '#/definitions/StockList'
+        '405':
+          description: Invalid input
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+
   /inventory/{productId}:
     get:
       summary: Pure Aloe inventory
@@ -26,11 +49,11 @@ paths:
       tags:
         - Inventory
       responses:
-        200:
+        '200':
           description: Success
           schema:
-            $ref: '#/definitions/StockList'
-        405:
+            $ref: '#/definitions/StockItem'
+        '405':
           description: Invalid input
         default:
           description: Unexpected error
@@ -40,7 +63,7 @@ definitions:
   StockList:
     type: array
     items:
-            $ref: '#/definitions/StockItem'
+      $ref: '#/definitions/StockItem'
   StockItem:
     type: object
     properties:

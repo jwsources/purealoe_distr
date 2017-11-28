@@ -1,22 +1,21 @@
 {
     "swagger": "2.0",
     "info": {
-        "description": "Karibu Distributor Services",
+        "title": "PureAloe API",
+        "description": "Salesforce Demo",
         "version": "1.0.0",
-        "title": "Karibu Distributor",
         "termsOfService": "http://swagger.io/terms/",
         "contact": {
-            "email": "mail@winkelmeyer.com"
+            "email": "jweijters@salesforce.com"
         },
         "license": {
             "name": "Apache 2.0",
             "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
         }
     },
-    "host": "karibu-distributor.herokuapp.com",
+    "host": "purealoe.herokuapp.com",
     "schemes": [
-        "https",
-        "http"
+        "https"
     ],
     "produces": [
         "application/json"
@@ -24,68 +23,104 @@
     "paths": {
         "/inventory/all": {
             "get": {
-                "summary": "Returns a list of all available inventory items",
-                "description": "",
+                "summary": "Returns a list of all available Pure Aloe inventory items",
+                "description": "The inventory endpoint returns information the current stock.",
                 "operationId": "getAllInventory",
                 "responses": {
                     "200": {
                         "description": "success",
                         "schema": {
-                            "$ref": "#/definitions/merchandiseInventoryItems"
+                            "$ref": "#/definitions/StockList"
                         }
                     },
                     "405": {
                         "description": "Invalid input"
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
                     }
                 }
             }
         },
-        "/inventory/{merchandiseName}": {
+        "/inventory/{productId}": {
             "get": {
-                "summary": "Get merchandise inventory",
-                "description": "",
-                "operationId": "getInventory",
+                "summary": "Pure Aloe inventory",
+                "description": "The inventory endpoint returns information the current stock.\n",
                 "parameters": [
                     {
-                        "name": "merchandiseName",
+                        "name": "productId",
                         "in": "path",
-                        "description": "The name of the merchandise",
+                        "description": "The product to request stock update from.",
                         "required": true,
                         "type": "string"
                     }
                 ],
+                "tags": [
+                    "Inventory"
+                ],
                 "responses": {
                     "200": {
-                        "description": "success",
+                        "description": "Success",
                         "schema": {
-                            "$ref": "#/definitions/merchandiseInventory"
+                            "$ref": "#/definitions/StockItem"
                         }
                     },
                     "405": {
                         "description": "Invalid input"
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
                     }
                 }
             }
         }
     },
     "definitions": {
-        "merchandiseInventoryItems": {
+        "StockList": {
             "type": "array",
             "items": {
-                "$ref": "#/definitions/merchandiseInventory"
+                "$ref": "#/definitions/StockItem"
             }
         },
-        "merchandiseInventory": {
+        "StockItem": {
             "type": "object",
             "properties": {
-                "merchandise": {
-                    "type": "string"
+                "productName": {
+                    "type": "string",
+                    "description": "Unique identifier."
                 },
-                "status": {
-                    "type": "string"
+                "warehouse": {
+                    "type": "string",
+                    "description": "Warehouse name."
+                },
+                "location": {
+                    "type": "string",
+                    "description": "Warehouse location."
                 },
                 "qty": {
-                    "type": "number"
+                    "type": "integer",
+                    "description": "Items in stock."
+                }
+            }
+        },
+        "Error": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "message": {
+                    "type": "string"
+                },
+                "fields": {
+                    "type": "string"
                 }
             }
         }
