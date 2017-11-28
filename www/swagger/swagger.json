@@ -51,6 +51,12 @@
     },
     "definitions": {
         "StockList": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/StockItem"
+            }
+        },
+        "StockItem": {
             "type": "object",
             "properties": {
                 "productName": {
