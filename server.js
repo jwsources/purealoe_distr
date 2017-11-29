@@ -142,7 +142,7 @@ app.use('/swagger', express.static(__dirname + '/swagger'));
 app.get('/mixes', getMixes);
 app.get('/mixes/:mixId', getMixDetails);
 app.get('/inventory/:product', getInventory);
-app.get('/inventory/:product/:warehouse', getInvemtoryLocation);
+app.get('/inventory/:product/:warehouse', getInventoryLocation);
 app.post('/approvals/:mixId', approveMix);
 
 
