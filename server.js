@@ -70,10 +70,12 @@ let getInventory = (req, res) => {
         } else {
             let productset ={};
             let products = resp.records;
-            productset['productName'] = product.get("Product__r").Name;
-            productset['warehouse'] = product.get("Warehouse__r").Name;
-            productset['location'] = product.get("Warehouse__r").Location__c;
-            productset['qty'] = product.get("Quantity__c");
+            products.forEach(product => {
+                productset['productName'] = product.get("Product__r").Name;
+                productset['warehouse'] = product.get("Warehouse__r").Name;
+                productset['location'] = product.get("Warehouse__r").Location__c;
+                productset['qty'] = product.get("Quantity__c");
+            });
             
 //            let prettyProducts = new Array();
 //            products.forEach(product => {
