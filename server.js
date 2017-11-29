@@ -78,7 +78,8 @@ let getInventory = (req, res) => {
                     qty: product.get("Quantity__c")
                 });
             });
-            res.json(prettyProducts);
+//            res.json(prettyProducts);
+            res.send(JSON.stringify(prettyProducts));
         }
     });
 
