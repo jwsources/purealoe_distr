@@ -63,7 +63,7 @@ let getMixDetails = (req, res) => {
 let getInventoryLocation = (req, res) => {
     let productName = req.params.product;
     let warehouseName = req.params.warehouse;
-    let q = "SELECT Id, Product__r.Name, Warehouse__r.Name, Warehouse__r.Location__c, Quantity__c " + "FROM StockItem__c " + "WHERE Product__r.Name = '" + productName + "AND Warehouse__r.Name = '" + warehouseName + "'";
+    let q = "SELECT Id, Product__r.Name, Warehouse__r.Name, Warehouse__r.Location__c, Quantity__c " + "FROM StockItem__c " + "WHERE Product__r.Name = '" + productName + "' AND Warehouse__r.Name = '" + warehouseName + "'";
     org.query({ query: q }, (err, resp) => {
         if (err) {
             console.log(err);
