@@ -60,6 +60,30 @@ let getMixDetails = (req, res) => {
 
 };
 
+let getInventoryLocation = (req, res) => {
+    let productName = req.params.product;
+    let warehouseName = req.params.warehouse;
+    let q = "SELECT Id, Product__r.Name, Warehouse__r.Name, Warehouse__r.Location__c, Quantity__c " + "FROM StockItem__c " + "WHERE Product__r.Name = '" + productName + "AND Warehouse__r.Name = '" + warehouseName + "'";
+    org.query({ query: q }, (err, resp) => {
+        if (err) {
+            console.log(err);
+            res.sendStatus(500);
+        } else {
+            let productset = {};
+            let products = resp.records;
+            products.forEach(product => {
+                productset['productName'] = product.get("Product__r").Name;
+                productset['warehouse'] = product.get("Warehouse__r").Name;
+                productset['location'] = product.get("Warehouse__r").Location__c;
+                productset['qty'] = product.get("Quantity__c");
+            });
+            res.send(JSON.stringify(productset));
+            //            res.send(JSON.stringify({productName: product.get("Product__r").Name, warehouse: product.get("Warehouse__r").Name, location: product.get("Warehouse__r").Location__c, qty: product.get("Quantity__c")}));
+        }
+    });
+
+};
+
 let getInventory = (req, res) => {
     let productName = req.params.product;
     let q = "SELECT Id, Product__r.Name, Warehouse__r.Name, Warehouse__r.Location__c, Quantity__c " + "FROM StockItem__c " + "WHERE Product__r.Name = '" + productName + "'";
@@ -118,6 +142,7 @@ app.use('/swagger', express.static(__dirname + '/swagger'));
 app.get('/mixes', getMixes);
 app.get('/mixes/:mixId', getMixDetails);
 app.get('/inventory/:product', getInventory);
+app.get('/inventory/:product/:warehouse', getInvemtoryLocation);
 app.post('/approvals/:mixId', approveMix);
 
 
