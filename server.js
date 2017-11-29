@@ -92,27 +92,17 @@ let getInventory = (req, res) => {
             console.log(err);
             res.sendStatus(500);
         } else {
-            let productset ={};
-            let products = resp.records;
+            let products = resp.records;            
+            let prettyProducts = new Array();
             products.forEach(product => {
-                productset['productName'] = product.get("Product__r").Name;
-                productset['warehouse'] = product.get("Warehouse__r").Name;
-                productset['location'] = product.get("Warehouse__r").Location__c;
-                productset['qty'] = product.get("Quantity__c");
+                prettyProducts.push({
+                    productName: product.get("Product__r").Name,
+                    warehouse: product.get("Warehouse__r").Name,
+                    location: product.get("Warehouse__r").Location__c,
+                    qty: product.get("Quantity__c")
+                });
             });
-            
-//            let prettyProducts = new Array();
-//            products.forEach(product => {
-//                prettyProducts.push({
-//                    productName: product.get("Product__r").Name,
-//                    warehouse: product.get("Warehouse__r").Name,
-//                    location: product.get("Warehouse__r").Location__c,
-//                    qty: product.get("Quantity__c")
-//                });
-//            });
-//            res.json(prettyProducts);
-            res.send(JSON.stringify(productset));
-//            res.send(JSON.stringify({productName: product.get("Product__r").Name, warehouse: product.get("Warehouse__r").Name, location: product.get("Warehouse__r").Location__c, qty: product.get("Quantity__c")}));
+            res.json(prettyProducts);
         }
     });
 
