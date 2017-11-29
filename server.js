@@ -5,6 +5,8 @@ let cors = require('cors');
 let app = express();
 let server = require('http').Server(app);
 let io = require('socket.io')(server);
+// The account id of the distributor
+let accountId;
 
 let getMixes = (req, res) => {
 //    let q = "SELECT Id, Name, Account__r.Name, Account__r.Id, Description__c, Qty__c FROM Bundle__c WHERE Status__c='Submitted to Distributors'";
@@ -67,7 +69,7 @@ let getInventory = (req, res) => {
             res.sendStatus(500);
         } else {
             let products = resp.records;
-            let prettyProducts = [];
+            let prettyProducts = '';
             products.forEach(product => {
                 prettyProducts.push({
                     productName: product.get("Product__r").Name,
@@ -102,6 +104,7 @@ let PORT = process.env.PORT || 5000;
 
 app.use(cors());
 app.use('/', express.static(__dirname + '/www'));
+app.use('/swagger', express.static(__dirname + '/swagger'));
 app.get('/mixes', getMixes);
 app.get('/mixes/:mixId', getMixDetails);
 app.get('/inventory/:product', getInventory);
