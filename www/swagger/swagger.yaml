@@ -52,6 +52,36 @@ paths:
         '200':
           description: Success
           schema:
+            $ref: '#/definitions/StockList'
+        '405':
+          description: Invalid input
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+
+  /inventory/{productId}/{warehouse}:
+    get:
+      summary: Pure Aloe inventory
+      description: |
+        The inventory endpoint returns information the current stock.
+      parameters:
+        - name: productId
+          in: path
+          description: The product to request stock update from.
+          required: true
+          type: string
+        - name: warehouse
+          in: path
+          description: The warehouse to request stock update from.
+          required: true
+          type: string
+      tags:
+        - Inventory
+      responses:
+        '200':
+          description: Success
+          schema:
             $ref: '#/definitions/StockItem'
         '405':
           description: Invalid input
@@ -59,6 +89,7 @@ paths:
           description: Unexpected error
           schema:
             $ref: '#/definitions/Error'
+
 definitions:
   StockList:
     type: array
