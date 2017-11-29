@@ -65,7 +65,7 @@
                     "200": {
                         "description": "Success",
                         "schema": {
-                            "$ref": "#/definitions/StockList"
+                            "$ref": "#/definitions/StockItem"
                         }
                     },
                     "405": {
@@ -126,6 +126,7 @@
     "definitions": {
         "StockList": {
             "type": "array",
+            "description": "Array of products",
             "items": {
                 "$ref": "#/definitions/StockItem"
             }

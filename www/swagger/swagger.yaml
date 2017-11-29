@@ -52,7 +52,7 @@ paths:
         '200':
           description: Success
           schema:
-            $ref: '#/definitions/StockList'
+            $ref: '#/definitions/StockItem'
         '405':
           description: Invalid input
         default:
@@ -93,6 +93,7 @@ paths:
 definitions:
   StockList:
     type: array
+    description: Array of products
     items:
       $ref: '#/definitions/StockItem'
   StockItem:
