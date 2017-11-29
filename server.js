@@ -69,7 +69,7 @@ let getInventory = (req, res) => {
             res.sendStatus(500);
         } else {
             let products = resp.records;
-            let prettyProducts;
+            let prettyProducts = new Array();
             products.forEach(product => {
                 prettyProducts.push({
                     productName: product.get("Product__r").Name,
